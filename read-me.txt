@@ -1,0 +1,237 @@
+Criar a pasta do projeto
+Entrar na pasta do projeto
+# python -m venv venv
+# venv/Scripts/Activate
+# python.exe -m pip install --upgrade pip
+# pip install pip setuptools wheel --upgrade
+# pip install django
+### Entrar no github, e criar seu repositório
+"""
+https://github.com/cpm1163/django_projeto1.git
+git@github.com:cpm1163/django_projeto1.git
+"""
+### criar ou instalar bibliotecas 
+### Instalar atraves do requirements.txt
+# pip install -r requirements.txt
+### criar o arquivo requirements.txt
+# pip freeze > requirements.txt
+### Listar a configuração
+### git config --list
+### configurar o git instalado no computador
+# git config --global user.name "cpm1163"
+# git config --global user.email "carlos.mahet@gmail.com"
+# git config --global init.defaultBranch main
+# git init
+### Neste passo é criada uma pasta oculta .git
+### Criar a chava SSH, não passar a senha
+# ssh-keygen
+"""
+Generating public/private rsa key pair.
+Enter file in which to save the key (C:\Users\carlo/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in C:\Users\carlo/.ssh/id_rsa
+Your public key has been saved in C:\Users\carlo/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:RU0iAoBbHvvSvVXGClYUoyHCQFJjQLQGGwkSHNAm1Ss carlo@LAPTOP-4PRNFCC8
+The key's randomart image is:
++---[RSA 3072]----+
+|^/Ooo.o.=.oo.    |
+|B=Bo.. +.+ ..    |
+|.O o ... ..      |
+|o E . o  .+      |
+|   + o .S+       |
+|  . o . o        |
+|   .   o         |
+|      .          |
+|                 |
++----[SHA256]-----+
+"""
+### Entrar no github para configurar a chave ssh no settings
+### Em SSH Keys, colar a chave criada
+### Volta para o repositório
+### Copia o endereço SSH do repositório
+# git remote add origin git@github.com:cpm1163/django_projeto1.git
+# git remote -v
+"""
+origin  git@github.com:cpm1163/django_projeto1.git (fetch)
+origin  git@github.com:cpm1163/django_projeto1.git (push)
+"""
+### Criar o projeto django dentro da pasta raiz
+# django-admin startproject project .
+### Criar o app de receitas recipes
+# python manage.py startapp recipes
+### incluir o novo app no arquivo settings.py do projeto
+### Explicando o include no url.py do projeto
+### Quando colocamos o include na url do projeto, significa que criar uma url filha do projeto
+### arquivo project/urls.py
+"""
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('recipes.urls')),
+]
+"""
+### Resolvendo o problema do emmet abbreviation do vs code
+### entrar no settings/json, incluir no final
+"""
+    "editor.fontSize": 16,
+    "files.associations": {"*html":"html"},
+    "emmet.triggerExpansionOnTab": true
+"""
+### Criar o diretorio templates dentro do app recipes
+### criar arquivo home.html
+### DICAS: para não compactar uma subpasta na lista de arquivos do vs code,
+### entrar no settings, digitar compact, desmarcar o compact folder
+### começar a preparar o html do site
+### pegar as tags fontes awesome
+"""
+no site: https://cdnjs.com/libraries/font-awesome
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" integrity="sha512-siarrzI1u3pCqFG2LEzi87McrBmq6Tp7juVsdmGY1Dr8Saw+ZBAzDzrGwX3vgxX1NkioYNCFOVC0GpDPss10zQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" integrity="sha512-P9pgMgcSNlLb4Z2WAB2sH5KBKGnBfyJnq+bhcfLCFusrRc4XdXrhfDluBl/usq75NF5gTDIMcwI1GaG5gju+Mw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+"""
+### Escolher os icones
+"""
+https://fontawesome.com/v4/icons/
+"""
+### Escolher um placeholder de imagem
+"""
+https://placeholder.com/
+
+Exemplo:
+https://via.placeholder.com/1280x720.png/269fe6
+"""
+################################### STATIC
+### Dentro do app criar a pasta STATIC, nesta pasta criar um subpasta com o name space do app
+"""
+RAIZ: APP/static/name_space/css/style.css
+############################################# configurando settings do projeto
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'recipes',
+]
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = '/static/'
+################################## configurando o APP/templates/recipes/partials/head.html
+### no topo do html incluir
+{% load static %}
+### inserir o link
+    <link rel="stylesheet" href="{% static 'recipes/css/style.css' %}">
+"""
+###################################### trabalhando com pasta static fora do app e projeto
+### na RAIZ, criar a pasta base_static\global\css\global-style.css
+### configurar a pasta no settings do projeto incluir settings STATICFILES_DIRS
+"""
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "base_static",
+]
+"""
+################################### concentrar os arquivos estaticos em uma pasta
+### django.contrib.staticfiles coleta arquivos estáticos de cada um dos seus aplicativos
+### (e quaisquer outros lugares que você especificar) em um único local que pode ser facilmente 
+### servido na produção.
+### https://docs.djangoproject.com/en/4.2/ref/contrib/staticfiles/
+### ############################### configurar settings
+### incluir no settings a pasta STATIC_ROOT
+"""
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "base_static",
+]
+
+STATIC_ROOT = BASE_DIR / 'static'
+"""
+### ao executar o commando a seguir vai criar a pasta raiz o diretorio static
+# python manage.py collectstatic
+"""
+OBS: se não configurar
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app
+without having set the STATIC_ROOT setting to a filesystem path. 
+
+OBS2: mensagem de configuração com sucesso
+127 static files copied to 'C:\Users\carlo\projects\Python\django_projeto1\static'.
+"""
+########################## Aula 42 url do app
+### muda o import para importat as V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg
+"""
+#from recipes.views import home
+from . import views
+
+urlpatterns = [
+    path('', views.home),
+]
+"""
+### antes de criar a url, vamos criar a view(recipe) temporaria para criar a url
+"""
+def recipe(request):
+    return render(request, 'recipes/pages/home.html', context={
+        'name': 'Carlo M'
+    })
+"""
+### criar uma url que aceita parametro. neste caso INT
+"""
+urlpatterns = [
+    path('', views.home),
+    path('recipes/<int:id>/', views.recipe),
+]
+"""
+### na vies receber o parametro INT
+"""
+# Create your views here.
+def recipe(request, id):
+    return render(request, 'recipes/pages/home.html', context={
+        'name': 'Carlo M'
+    })
+"""
+########################## Aula 43 criar o template para 1 receita
+### Primeira criar um novo template no app, template/recipes/page/recipe-view.html
+### Mudar na views o template
+"""
+# Create your views here.
+def recipe(request, id):
+    return render(request, 'recipes/pages/recipe-view.html', context={
+        'name': 'Carlo M'
+    })
+"""
+### Acerat p template recipe-view.html para mostrar uma receita
+"""
+<main class="main-content-container">
+    <div class="main-content main-content-detail container">
+        
+        {% include 'recipes/partials/recipe.html' %}
+
+    </div>
+</main>
+"""
+### Acertar o style.css
+"""
+.main-content-detail  .recipe-list-item {
+    max-width: 84rem;
+    margin: 0 auto;
+  }
+  
+  .main-content-detail .recipe-list-item:hover {
+    transform: scale(1);
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+""
