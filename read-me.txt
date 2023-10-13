@@ -195,7 +195,7 @@ urlpatterns = [
     path('recipes/<int:id>/', views.recipe),
 ]
 """
-### na vies receber o parametro INT
+### na views receber o parametro INT
 """
 # Create your views here.
 def recipe(request, id):
@@ -235,3 +235,25 @@ def recipe(request, id):
     box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
   }
 ""
+########################## Aula 44 criar herança
+### no base_templates/global, criar o arquivo base.html
+### marca onde vai entrar o conteudo
+"""
+        {% block content %}{% endblock content %}
+"""
+### Nas paginas do recipes(home.html, recipe-view.html), extender o base_templates/global/base.html
+"""
+{% extends 'global/base.html' %}
+{% block content %}
+<div class="main-content main-content-list container">    
+    {% include 'recipes/partials/recipe.html' %}
+    {% include 'recipes/partials/recipe.html' %}
+    {% include 'recipes/partials/recipe.html' %}
+    {% include 'recipes/partials/recipe.html' %}
+    {% include 'recipes/partials/recipe.html' %}
+    {% include 'recipes/partials/recipe.html' %}
+</div>
+{% endblock content %}
+"""
+### acerto no base.html
+### acerto no recipes\templates\recipes\partials\head.html
