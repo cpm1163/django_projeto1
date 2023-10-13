@@ -257,3 +257,6 @@ def recipe(request, id):
 """
 ### acerto no base.html
 ### acerto no recipes\templates\recipes\partials\head.html
+########################## Aula 46 injetando dados
+# pip install Faker
+### criar o arquivo na raiz do projeto main.py
