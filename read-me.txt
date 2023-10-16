@@ -271,7 +271,7 @@ def recipe(request, id):
 # python manage.py makemigrations
 ### DICAS
 ### https://docs.djangoproject.com/pt-br/3.2/ref/models/fields/
-########################## 54. Registrando category na admin do Django
+########################## Aula 54. Registrando category na admin do Django
 ### Criar um super usuario
 # python manage.py createsuperuser
 """
@@ -286,7 +286,7 @@ abc123
     def __str__(self):
         return self.name
 """
-########################## 55. Adicionando Recipes na admin
+########################## Aula 55. Adicionando Recipes na admin
 ### Registrando a model no admin, OUTRA FORMA, com decorador
 """
 @admin.register(Recipe)
@@ -306,4 +306,34 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 """
 ### Pegar texto em HTML https://www.webfx.com/web-design/html-ipsum/
-
+########################## Aula 56. Conhecendo o Django Shell e manipulando QuerySets com ele
+########################## Aula 58. Usando o model Recipe real (com QuerySet) na view home
+### Editar o django_projeto1\recipes\views.py
+### Permitir cadastro de receita sem imagem, em django_projeto1\recipes\models.py, alterar o cover,
+### incluir blank, default
+"""
+cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
+"""
+### alterar o html para escolher se vai ter imagem na pagina em django_projeto1\recipes\templates\recipes\partials\recipe.html
+"""
+<div class="recipe recipe-list-item">
+    {% if recipe.cover %}
+        <div class="recipe-cover">
+            <a href="{% url 'recipes:recipe' recipe.id %}">
+                <img src="{{ recipe.cover.url }}" alt="Temporário">
+            </a>
+        </div>
+    {% endif %}
+"""
+### permitir se usuario não estiver cadatrado o first name, mostrar o user name, django_projeto1\recipes\templates\recipes\partials\recipe.html
+"""
+    <div class="recipe-author">
+        <span class="recipe-author-item">
+            <i class="fas fa-user"></i>
+            {% if recipe.author.first_name %}
+                {{ recipe.author.first_name }} {{ recipe.Author.last_name }}
+            {% else %}
+                {{ recipe.author.username }}
+            {% endif %}
+"""
+########################## Aula 59. Ocultando receitas que não estão publicadas (filter para is_published)
