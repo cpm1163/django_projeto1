@@ -262,4 +262,11 @@ def recipe(request, id):
 ### criar o arquivo na raiz do projeto main.py
 ########################## Aula 51 Model e seus atributos
 
+########################## Aula 52 makemigrations e migrate - Aplicando as migrações
+### Necessário instalar o Pillow
+# pip install pillow
+### executar as migrações
+# python manage.py migrate
+### criar as migrações 
+# python manage.py makemigrations
 
