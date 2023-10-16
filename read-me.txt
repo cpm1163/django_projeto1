@@ -260,3 +260,6 @@ def recipe(request, id):
 ########################## Aula 46 injetando dados
 # pip install Faker
 ### criar o arquivo na raiz do projeto main.py
+########################## Aula 51 Model e seus atributos
+
+
