@@ -269,4 +269,41 @@ def recipe(request, id):
 # python manage.py migrate
 ### criar as migrações 
 # python manage.py makemigrations
+### DICAS
+### https://docs.djangoproject.com/pt-br/3.2/ref/models/fields/
+########################## 54. Registrando category na admin do Django
+### Criar um super usuario
+# python manage.py createsuperuser
+"""
+Username (leave blank to use 'carlo'): carlosmahet
+Email address: carlos.mahet@gmail.com
+abc123
+"""
+### Para registrar o model no admin, dentro do django_projeto1\recipes\admin.py
+
+### Mostrar o nome da categoria no admin, se não colocar isso, aparece o admin
+"""
+    def __str__(self):
+        return self.name
+"""
+########################## 55. Adicionando Recipes na admin
+### Registrando a model no admin, OUTRA FORMA, com decorador
+"""
+@admin.register(Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    ...
+"""
+### Incluir as variaveis em django_projeto1\project\settings.py
+"""
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+"""
+### Corrigindo a imagem em url.py do projeto
+"""
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+"""
+### Pegar texto em HTML https://www.webfx.com/web-design/html-ipsum/
 

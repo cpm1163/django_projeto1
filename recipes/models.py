@@ -3,8 +3,11 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=65)
+    # Mostrar o nome da categoria no admin, se não colocar isso, aparece o admin
+    def __str__(self):
+        return self.name
 
-class Recipes(models.Model):
+class Recipe(models.Model):
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=165)
     slug = models.SlugField()
@@ -24,3 +27,7 @@ class Recipes(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
         )
+
+    # Mostrar o titulo da receita no admin, se não colocar isso, aparece o admin
+    def __str__(self):
+        return self.title    
